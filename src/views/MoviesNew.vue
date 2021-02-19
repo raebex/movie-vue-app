@@ -15,6 +15,7 @@
       <br />
       Plot:
       <input type="text" v-model="newPlot" />
+      <div v-bind:class="{ 'text-danger': newPlot.length > 500 }">{{ 500 - newPlot.length }} characters remaining</div>
       <br />
       Director:
       <input type="text" v-model="newDirector" />
@@ -23,6 +24,12 @@
     </form>
   </div>
 </template>
+
+<style scoped>
+.text-danger {
+  color: red;
+}
+</style>
 
 <script>
 import axios from "axios";
