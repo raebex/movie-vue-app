@@ -1,25 +1,39 @@
 <template>
   <div class="movies-new">
+    <h1>Add a new movie:</h1>
     <form v-on:submit.prevent="createMovie()">
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
           {{ error }}
         </li>
       </ul>
-      <h2>Add a new movie:</h2>
-      Title:
-      <input type="text" v-model="newTitle" />
-      <br />
-      Year:
-      <input type="text" v-model="newYear" />
-      <br />
-      Plot:
-      <input type="text" v-model="newPlot" />
-      <div v-bind:class="{ 'text-danger': newPlot.length > 500 }">{{ 500 - newPlot.length }} characters remaining</div>
-      <br />
-      Director:
-      <input type="text" v-model="newDirector" />
-      <br />
+      <div>
+        <label>
+          Title:
+          <input type="text" v-model="newTitle" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Year:
+          <input type="text" v-model="newYear" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Plot:
+          <textarea v-model="newPlot" rows="10" cols="40"></textarea>
+        </label>
+        <div v-bind:class="{ 'text-danger': newPlot.length > 500 }">
+          {{ 500 - newPlot.length }} characters remaining
+        </div>
+      </div>
+      <div>
+        <label>
+          Director:
+          <input type="text" v-model="newDirector" />
+        </label>
+      </div>
       <input type="submit" class="btn btn-primary" value="Add Movie" />
     </form>
   </div>

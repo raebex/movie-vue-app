@@ -1,24 +1,36 @@
 <template>
   <div class="movies-edit">
+    <h1>Edit movie:</h1>
     <form v-on:submit.prevent="updateMovie()">
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
           {{ error }}
         </li>
       </ul>
-      <h2>Edit movie:</h2>
-      Title:
-      <input type="text" v-model="movie.title" />
-      <br />
-      Year:
-      <input type="text" v-model="movie.year" />
-      <br />
-      Plot:
-      <input type="text" v-model="movie.plot" />
-      <br />
-      Director:
-      <input type="text" v-model="movie.director" />
-      <br />
+      <div>
+        <label>
+          Title:
+          <input type="text" v-model="movie.title" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Year:
+          <input type="text" v-model="movie.year" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Plot:
+          <textarea v-model="movie.plot" rows="10" cols="40"></textarea>
+        </label>
+      </div>
+      <div>
+        <label>
+          Director:
+          <input type="text" v-model="movie.director" />
+        </label>
+      </div>
       <input type="submit" class="btn btn-primary" value="Update" />
     </form>
     <button v-on:click="destroyMovie()">Destroy</button>
