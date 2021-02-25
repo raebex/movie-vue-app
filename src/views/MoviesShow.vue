@@ -1,7 +1,7 @@
 <template>
   <div class="movies-show">
     <div>
-      <h2>{{ movie.title }}</h2>
+      <h1>{{ movie.title }}</h1>
       <p>Year: {{ movie.year }}</p>
       <p>Plot: {{ movie.plot }}</p>
       <p>Director: {{ movie.director }}</p>
