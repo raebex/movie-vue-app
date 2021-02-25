@@ -1,17 +1,35 @@
 <template>
   <div class="movies-index">
-    Search by title:
-    <input type="text" v-model="titleFilter" list="titleList" />
+    <input type="text" placeholder="Search by title" v-model="titleFilter" list="titleList" />
 
     <datalist id="titleList">
       <option v-for="movie in movies" :key="movie.id">{{ movie.title }}</option>
     </datalist>
 
-    <div>
-      <button v-on:click="sort('title', 1, 1)" :class="{ active: activeButton === 1 }">Sort Alphabetically</button>
-      <button v-on:click="sort('year', 1, 2)" :class="{ active: activeButton === 2 }">Sort by oldest</button>
-      <button v-on:click="sort('year', -1, 3)" :class="{ active: activeButton === 3 }">Sort by newest</button>
-    </div>
+    <fieldset>
+      <legend>Sort:</legend>
+      <ul>
+        <li>
+          <label for="alphabetically">alphabetically</label>
+          <input
+            v-on:change="sort('title', 1)"
+            type="radio"
+            id="alphabetically"
+            name="sort"
+            value="alphabetically"
+            v-model="picked"
+          />
+        </li>
+        <li>
+          <label for="oldest">oldest</label>
+          <input v-on:change="sort('year', 1)" type="radio" id="oldest" name="sort" value="oldest" v-model="picked" />
+        </li>
+        <li>
+          <label for="newest">newest</label>
+          <input v-on:change="sort('year', -1)" type="radio" id="newest" name="sort" value="newest" v-model="picked" />
+        </li>
+      </ul>
+    </fieldset>
 
     <ul is="transition-group" appear enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
       <li v-for="movie in orderBy(filterBy(movies, titleFilter, 'title'), sortField, sortOrder)" :key="movie.id">
@@ -48,7 +66,7 @@ export default {
       titleFilter: "",
       sortField: "title",
       sortOrder: 1,
-      activeButton: 1,
+      picked: "alphabetically",
     };
   },
   created: function() {
@@ -62,10 +80,9 @@ export default {
       });
   },
   methods: {
-    sort: function(field, direction, button) {
+    sort: function(field, direction) {
       this.sortField = field;
       this.sortOrder = direction;
-      this.activeButton = button;
     },
   },
 };
