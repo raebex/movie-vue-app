@@ -1,6 +1,7 @@
 <template>
   <div class="movies-index">
-    Search by title: <input type="text" v-model="titleFilter" list="titleList" />
+    Search by title:
+    <input type="text" v-model="titleFilter" list="titleList" />
 
     <datalist id="titleList">
       <option v-for="movie in movies" :key="movie.id">{{ movie.title }}</option>
@@ -66,6 +67,6 @@ export default {
       this.sortOrder = direction;
       this.activeButton = button;
     },
-  }
+  },
 };
 </script>
