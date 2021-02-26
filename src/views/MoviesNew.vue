@@ -1,37 +1,37 @@
 <template>
   <div class="movies-new">
     <h1>Add a new movie:</h1>
-    <form v-on:submit.prevent="createMovie()">
-      <ul>
-        <li class="text-danger" v-for="error in errors" v-bind:key="error">
-          {{ error }}
-        </li>
-      </ul>
-      <div>
+    <ul>
+      <li class="text-danger" v-for="error in errors" v-bind:key="error">
+        {{ error }}
+      </li>
+    </ul>
+    <form v-on:submit.prevent="createMovie()" class="mb-5">
+      <div class="form-group">
         <label>
           Title:
-          <input type="text" v-model="newTitle" />
+          <input class="form-control" type="text" v-model="newTitle" />
         </label>
       </div>
-      <div>
+      <div class="form-group">
         <label>
           Year:
-          <input type="text" v-model="newYear" />
+          <input class="form-control" type="text" v-model="newYear" />
         </label>
       </div>
-      <div>
+      <div class="form-group">
         <label>
           Plot:
-          <textarea v-model="newPlot" rows="10" cols="40"></textarea>
+          <textarea class="form-control" v-model="newPlot" rows="10" cols="40"></textarea>
         </label>
         <div v-bind:class="{ 'text-danger': newPlot.length > 500 }">
           {{ 500 - newPlot.length }} characters remaining
         </div>
       </div>
-      <div>
+      <div class="form-group">
         <label>
           Director:
-          <input type="text" v-model="newDirector" />
+          <input class="form-control" type="text" v-model="newDirector" />
         </label>
       </div>
       <input type="submit" class="btn btn-primary" value="Add Movie" />
