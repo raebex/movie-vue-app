@@ -1,45 +1,99 @@
 <template>
   <div class="movies-index">
-    <input type="text" placeholder="Search by title" v-model="titleFilter" list="titleList" />
+    <div class="jumbotron">
+      <h1 class="display-4">Movie App</h1>
+      <p class="lead">
+        A collection of my favorite movies.
+      </p>
+      <router-link class="btn btn-primary btn-lg" to="/movies/new" role="button">Add a movie</router-link>
+    </div>
 
-    <datalist id="titleList">
-      <option v-for="movie in movies" :key="movie.id">{{ movie.title }}</option>
-    </datalist>
-
-    <fieldset>
-      <legend>Sort:</legend>
-      <ul>
-        <li>
-          <label for="alphabetically">alphabetically</label>
+    <div class="d-flex justify-content-between mb-5">
+      <div class="input-group">
+        <div class="form-outline">
+          <label class="form-label" for="form1">Search</label>
           <input
-            v-on:change="sort('title', 1)"
-            type="radio"
-            id="alphabetically"
-            name="sort"
-            value="alphabetically"
-            v-model="picked"
+            type="search"
+            id="form1"
+            class="form-control"
+            placeholder="Search by title"
+            list="titleList"
+            v-model="titleFilter"
           />
-        </li>
-        <li>
-          <label for="oldest">oldest</label>
-          <input v-on:change="sort('year', 1)" type="radio" id="oldest" name="sort" value="oldest" v-model="picked" />
-        </li>
-        <li>
-          <label for="newest">newest</label>
-          <input v-on:change="sort('year', -1)" type="radio" id="newest" name="sort" value="newest" v-model="picked" />
-        </li>
-      </ul>
-    </fieldset>
+        </div>
+      </div>
 
-    <ul is="transition-group" appear enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
-      <li v-for="movie in orderBy(filterBy(movies, titleFilter, 'title'), sortField, sortOrder)" :key="movie.id">
-        <h2>{{ movie.title }}</h2>
-        <p>Year: {{ movie.year }}</p>
-        <p>Plot: {{ movie.plot }}</p>
-        <p>Director: {{ movie.director }}</p>
-        <router-link :to="`/movies/${movie.id}`">More info</router-link>
-      </li>
-    </ul>
+      <datalist id="titleList">
+        <option v-for="movie in movies" :key="movie.id">{{ movie.title }}</option>
+      </datalist>
+
+      <fieldset class="input-group">
+        <ul>
+          <legend class="form-label">
+            <small class="text-muted">Sort:</small>
+          </legend>
+          <li class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              v-on:change="sort('title', 1)"
+              type="radio"
+              id="alphabetically"
+              name="sort"
+              value="alphabetically"
+              v-model="picked"
+            />
+            <label class="form-check-label" for="alphabetically">alphabetically</label>
+          </li>
+          <li class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              v-on:change="sort('year', 1)"
+              type="radio"
+              id="oldest"
+              name="sort"
+              value="oldest"
+              v-model="picked"
+            />
+            <label class="form-check-label" for="oldest">oldest</label>
+          </li>
+          <li class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              v-on:change="sort('year', -1)"
+              type="radio"
+              id="newest"
+              name="sort"
+              value="newest"
+              v-model="picked"
+            />
+            <label class="form-check-label" for="newest">newest</label>
+          </li>
+        </ul>
+      </fieldset>
+    </div>
+    <div
+      class="row row-cols-1 row-cols-md-3"
+      is="transition-group"
+      appear
+      enter-active-class="animated slideInUp"
+      leave-active-class="animated slideOutDown"
+    >
+      <div
+        class="col mb-4"
+        v-for="movie in orderBy(filterBy(movies, titleFilter, 'title'), sortField, sortOrder)"
+        :key="movie.id"
+      >
+        <div class="card h-100">
+          <div class="card-body">
+            <h2>{{ movie.title }}</h2>
+            <p>Year: {{ movie.year }}</p>
+            <p>Plot: {{ movie.plot }}</p>
+            <p>Director: {{ movie.director }}</p>
+            <router-link :to="`/movies/${movie.id}`">More info</router-link>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
