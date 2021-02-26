@@ -89,6 +89,13 @@
             <p>Year: {{ movie.year }}</p>
             <p>Plot: {{ movie.plot }}</p>
             <p>Director: {{ movie.director }}</p>
+            <p v-if="movie.actors.length > 0">
+              Actors:
+              <span v-for="(actor, index) in movie.actors" :key="actor.id">
+                {{ actor.first_name }} {{ actor.last_name }}
+                <span v-if="index < movie.actors.length - 1">,</span>
+              </span>
+            </p>
             <router-link :to="`/movies/${movie.id}`">More info</router-link>
           </div>
         </div>
