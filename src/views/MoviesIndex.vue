@@ -86,6 +86,7 @@
         <div class="card h-100">
           <div class="card-body">
             <h2>{{ movie.title }}</h2>
+            <div class="badge badge-info mb-2 mr-1" v-for="genre in movie.genres" :key="genre.name">{{ genre }}</div>
             <p>Year: {{ movie.year }}</p>
             <p>Plot: {{ movie.plot }}</p>
             <p>Director: {{ movie.director }}</p>
@@ -96,7 +97,7 @@
                 <span v-if="index < movie.actors.length - 1">,</span>
               </span>
             </p>
-            <router-link :to="`/movies/${movie.id}`">More info</router-link>
+            <router-link class="btn btn-secondary" :to="`/movies/${movie.id}`">More info</router-link>
           </div>
         </div>
       </div>
